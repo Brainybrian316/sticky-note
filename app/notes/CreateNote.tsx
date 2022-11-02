@@ -10,8 +10,15 @@ export default function CreateNote() {
 	const router = useRouter();
 
 	const create = async () => {
+		// const db = new PocketBase('http://127.0.0.1:8090');
+
+		// await db.records.create('notes', {
+		//   title,
+		//   content,
+		// });
+
 		await fetch('http://127.0.0.1:8090/api/collections/notes/records', {
-			method: 'Post',
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -20,8 +27,10 @@ export default function CreateNote() {
 				content,
 			}),
 		});
+
 		setContent('');
 		setTitle('');
+
 		router.refresh();
 	};
 
@@ -39,7 +48,7 @@ export default function CreateNote() {
 				value={content}
 				onChange={(e) => setContent(e.target.value)}
 			/>
-			<button type="submit">Create Note</button>
+			<button type="submit">Create note</button>
 		</form>
 	);
 }
